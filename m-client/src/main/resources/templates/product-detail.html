@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini eCommerce</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img th:src="${product.image}" width="100%" id="productImg">
+
+                <div class="small-img-row">
+                    <div class="small-img-rol" th:each="gallery : ${product.gallery}">
+                        <img th:src="${gallery}" width="100%" class="small-img">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <h1 th:text="${product.title}" />
+                <h4 th:text="'$' + ${product.price}" />
+                <a th:href="@{|/order/${product.id}/${1}|}" class="btn">Order</a>
+                <h3>Product Detail
+                    <i class="fa fa-indent"></i>
+                </h3>
+                <br>
+                <p th:text="${product.description}" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

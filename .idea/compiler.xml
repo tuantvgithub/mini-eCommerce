@@ -8,16 +8,22 @@
         <outputRelativeToContentRoot value="true" />
         <module name="m-client" />
         <module name="m-product" />
+        <module name="m-payment" />
+        <module name="m-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="m-client" target="11" />
+      <module name="m-order" target="11" />
+      <module name="m-payment" target="11" />
       <module name="m-product" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="m-client" options="-parameters" />
+      <module name="m-order" options="-parameters" />
+      <module name="m-payment" options="-parameters" />
       <module name="m-product" options="-parameters" />
     </option>
   </component>

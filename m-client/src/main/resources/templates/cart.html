@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini eCommerce</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2 class="title">Order Microservice</h2>
+    <div class="row">
+      <div class="col-4">
+        <i>
+          We will avoid adding the necessary forms in order
+          to keep the application as basic and simple as possible for the future
+        </i>
+        <a th:href="@{|/pay-order/${order.id}/${amount}|}" class="btn">
+          Pay my order
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
