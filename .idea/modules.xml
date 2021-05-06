@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/config-repo/config-repo.iml" filepath="$PROJECT_DIR$/config-repo/config-repo.iml" />
       <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/m-client/m-client.iml" filepath="$PROJECT_DIR$/m-client/m-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/m-order/m-order.iml" filepath="$PROJECT_DIR$/m-order/m-order.iml" />
       <module fileurl="file://$PROJECT_DIR$/m-payment/m-payment.iml" filepath="$PROJECT_DIR$/m-payment/m-payment.iml" />

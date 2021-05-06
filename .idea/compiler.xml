@@ -11,10 +11,12 @@
         <module name="m-product" />
         <module name="m-payment" />
         <module name="m-order" />
+        <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="config-server" target="11" />
+      <module name="eureka-server" target="11" />
       <module name="m-client" target="11" />
       <module name="m-order" target="11" />
       <module name="m-payment" target="11" />
@@ -24,6 +26,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="config-server" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
       <module name="m-client" options="-parameters" />
       <module name="m-order" options="-parameters" />
       <module name="m-payment" options="-parameters" />
