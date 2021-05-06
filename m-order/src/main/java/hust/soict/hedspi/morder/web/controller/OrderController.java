@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/orders")
 public class OrderController {
@@ -32,6 +34,18 @@ public class OrderController {
             return new ResponseEntity<>(order, HttpStatus.OK);
         } catch (OrderNotFoundException onfe) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Order>> getAllOrder() {
+        try {
+            List<Order> orders = this.service.getAllOrder();
+            return orders.isEmpty() ?
+                    new ResponseEntity<>(null, HttpStatus.NO_CONTENT) :
+                    new ResponseEntity<>(orders, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -10,15 +10,26 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  <div class="container">
-    <h2 class="title">Order Microservice</h2>
+  <div class="navbar">
+    <nav>
+      <ul id="MenuItems">
+        <li><a th:href="@{/}">Products</a></li>
+        <li><a th:href="@{/my-order}">My Orders</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="small-container">
+    <h2 class="title">Orders</h2>
     <div class="row">
-      <div class="col-4">
-        <i>
-          We will avoid adding the necessary forms in order
-          to keep the application as basic and simple as possible for the future
-        </i>
-        <a th:href="@{|/pay-order/${order.id}/${amount}|}" class="btn">
+      <div class="col-4" th:each="order : ${orders}">
+        <h4 th:text="'product id: ' + ${order.productId}"/>
+        <h4 th:text="'quantity: ' + ${order.quantity}"/>
+        <h4 th:text="'date: ' + ${#dates.format(order.dateOrder, 'HH:mm dd/MM/yyyy')}"/>
+
+        <h4 th:if="${order.paid}">
+          status: paid
+        </h4>
+        <a th:unless="${order.paid}" th:href="@{|/pay-order/${order.id}|}" class="btn">
           Pay my order
         </a>
       </div>

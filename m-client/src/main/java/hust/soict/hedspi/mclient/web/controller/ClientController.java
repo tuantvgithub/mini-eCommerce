@@ -11,8 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Date;
 import java.util.List;
@@ -47,9 +51,16 @@ public class ClientController {
         return "product-detail";
     }
 
+    @RequestMapping("/my-order")
+    public String myOrder(Model model) {
+        model.addAttribute("orders", this.orderProxy.getAllOrder());
+
+        return "cart";
+    }
+
     @RequestMapping("/order/{productId}/{quantity}")
-    public String orderProduct(@PathVariable Long productId,
-                               @PathVariable Long quantity, Model model) {
+    public ModelAndView orderProduct(@PathVariable Long productId,
+                                     @PathVariable Long quantity) {
 
         OrderBean orderBean = new OrderBean();
 
@@ -58,23 +69,20 @@ public class ClientController {
         orderBean.setQuantity(quantity);
         orderBean.setPaid(false);
 
-        OrderBean order = this.orderProxy.createOrder(orderBean);
+        this.orderProxy.createOrder(orderBean);
 
-        ProductBean productBean = this.productProxy.getProductById(productId);
-        Long amount = quantity * productBean.getPrice();
-
-        model.addAttribute("order", order);
-        model.addAttribute("amount", amount);
-
-        return "cart";
+        return new ModelAndView(new RedirectView("/my-order"));
     }
 
-    @RequestMapping("/pay-order/{orderId}/{amount}")
-    public String payOrder(@PathVariable Long orderId, @PathVariable Long amount, Model model) {
+    @RequestMapping("/pay-order/{orderId}")
+    public String payOrder(@PathVariable Long orderId, Model model) {
 
         PaymentBean paymentBean = new PaymentBean();
         paymentBean.setOrderId(orderId);
-        paymentBean.setAmount(amount);
+
+        OrderBean orderBean = this.orderProxy.getOrderById(orderId);
+        ProductBean productBean = this.productProxy.getProductById(orderBean.getProductId());
+        paymentBean.setAmount(productBean.getPrice() * orderBean.getQuantity());
 
         ResponseEntity<PaymentBean> payment = this.paymentProxy.createPayment(paymentBean);
 

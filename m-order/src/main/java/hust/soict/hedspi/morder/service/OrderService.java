@@ -6,6 +6,7 @@ import hust.soict.hedspi.morder.web.exception.OrderNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,9 @@ public class OrderService {
         }
 
         return orderData.get();
+    }
+
+    public List<Order> getAllOrder() {
+        return this.repository.findAll();
     }
 }

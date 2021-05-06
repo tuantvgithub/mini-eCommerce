@@ -9,16 +9,27 @@
         href="http://localhost:8080/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
 </head>
 <body>
+  <div class="navbar">
+    <nav>
+      <ul id="MenuItems">
+        <li><a th:href="@{/}">Products</a></li>
+        <li><a th:href="@{/my-order}">My Orders</a></li>
+      </ul>
+    </nav>
+  </div>
   <div class="container">
-    <h2 class="title">Payment Microservice</h2>
+    <h2 class="title">Payment</h2>
     <div class="row">
       <div class="col-md-4 mx-auto mt-5 text-center">
-        <p th:if="${paid}" >
+        <p th:if="${paid}" style="color:green">
           Payment accepted
         </p>
-        <p th:unless="${paid}">
+        <p th:unless="${paid}" style="color:red">
           Payment was not successful
         </p>
+        <a th:href="@{|/my-order|}" class="btn">
+          Ok
+        </a>
       </div>
     </div>
   </div>
