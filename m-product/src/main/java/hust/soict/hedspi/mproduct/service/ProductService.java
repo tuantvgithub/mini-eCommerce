@@ -1,5 +1,6 @@
 package hust.soict.hedspi.mproduct.service;
 
+import hust.soict.hedspi.mproduct.configurations.ApplicationPropertiesConfiguration;
 import hust.soict.hedspi.mproduct.model.Product;
 import hust.soict.hedspi.mproduct.repository.ProductRepository;
 import hust.soict.hedspi.mproduct.web.exception.ProductNotFoundException;
@@ -15,12 +16,17 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
+    @Autowired
+    private ApplicationPropertiesConfiguration properties;
+
     public Product createProduct(Product product) {
         return this.repository.save(product);
     }
 
     public List<Product> getAllProduct() {
-        return this.repository.findAll();
+        List<Product> products = this.repository.findAll();
+
+        return products.subList(0, this.properties.getLimitProduct());
     }
 
     public Product getProductById(Long id) throws ProductNotFoundException {
@@ -32,4 +38,5 @@ public class ProductService {
 
         return productData.get();
     }
+
 }
